@@ -10,7 +10,7 @@ self.addEventListener('install', function(event) {
             '/dist/build.js'
         ])
     }))
-})
+});
 
 self.addEventListener('fetch', function(event) {
     console.log("cached", event.request.url)

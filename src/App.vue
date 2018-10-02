@@ -10,7 +10,7 @@
             <i class="material-icons iicon t2s" @click="mute(false)" v-else>volume_off</i>
         </div>
         <div class="wrapper" v-else>
-            <i class="material-icons iicon recording" @click="microphone(false)">mic</i><input class="queryform" :placeholder="speech" readonly>   
+            <i class="material-icons iicon recording" @click="microphone(false)">mic</i><input class="queryform" :placeholder="speech" readonly>
         </div>
     </div>
 
@@ -57,11 +57,19 @@
 
                     <!-- Bot message types / Speech -->
 
-                    <div v-if="a.result.fulfillment.speech" class="bubble bot">
-                        {{a.result.fulfillment.speech}}
-                    </div>
+                    <!--<div v-if="a.result.fulfillment.speech" class="bubble bot">-->
+                        <!--{{a.result.fulfillment.speech}}-->
+                    <!--</div>-->
 
                     <!-- Google Assistant output -->
+                    <div v-for="r in a.result.fulfillment.messages">
+                        <div class="bubble bot" v-if="r.type === 0">
+                            <div v-if="r.speech" class="bubble bot">
+                                <!--<nl2br>{{r.speech}}</nl2br>-->
+                                <nl2br tag="p" :text="r.speech"/>
+                            </div>
+                        </div>
+                    </div>
                     <div v-for="r in a.result.fulfillment.messages">
 
                         <!-- Bot message types / Card -->
@@ -152,7 +160,7 @@
         </table>
 
         <br>
-        <p class="copyright" v-if="answers.length > 0">Proudly powered by <a href="https://ushakov.co">Ushakov</a> & <a href="https://dialogflow.com">Dialogflow</a></p>
+        <!--<p class="copyright" v-if="answers.length > 0">Proudly powered by <a href="https://ushakov.co">Ushakov</a> & <a href="https://dialogflow.com">Dialogflow</a></p>-->
         <a id="bottom"></a>
     </main>
 </section>
@@ -166,11 +174,13 @@
 <script>
 import { ApiAiClient } from 'api-ai-javascript'
 import config from './../config'
+import Nl2br from "vue-nl2br/src/Nl2br";
 
 const client = new ApiAiClient({accessToken: config.app.token}) // <- replace it with yours
 
 export default {
     name: 'app',
+    components: {Nl2br},
     data: function(){
         return {
             answers: [],
