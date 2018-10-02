@@ -54,14 +54,6 @@
             <!-- Dialogflow messages -->
             <tr>
                 <td>
-
-                    <!-- Bot message types / Speech -->
-
-                    <!--<div v-if="a.result.fulfillment.speech" class="bubble bot">-->
-                        <!--{{a.result.fulfillment.speech}}-->
-                    <!--</div>-->
-
-                    <!-- Google Assistant output -->
                     <div v-for="r in a.result.fulfillment.messages">
                         <div class="bubble bot" v-if="r.type === 0">
                             <div v-if="r.speech" class="bubble bot">
@@ -70,6 +62,18 @@
                             </div>
                         </div>
                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <!-- Bot message types / Speech -->
+
+                    <!--<div v-if="a.result.fulfillment.speech" class="bubble bot">-->
+                        <!--{{a.result.fulfillment.speech}}-->
+                    <!--</div>-->
+
+                    <!-- Google Assistant output -->
                     <div v-for="r in a.result.fulfillment.messages">
 
                         <!-- Bot message types / Card -->
